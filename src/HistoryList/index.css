@@ -1,0 +1,20 @@
+.history-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.website-details-container {
+  display: flex;
+  justify-content: flex-start;
+}
+.logo-website {
+  display: flex;
+  justify-content: flex-start;
+}
+.time-accessed {
+  justify-self: flex-start;
+}
+.button {
+  justify-self: flex-end;
+}

@@ -1,8 +1,6 @@
 import {Component} from 'react'
-
-import './index.css'
-
 import HistoryListItem from '../HistoryList'
+import './index.css'
 
 const initialHistoryList = [
   {
@@ -86,7 +84,7 @@ class HistoryPage extends Component {
     this.setState({searchInput: event.target.value})
   }
 
-  onDeleteItem = id => {
+  deleteHistory = id => {
     const {HistoryList} = this.state
     const filteredList = HistoryList.filter(
       eachHistory => eachHistory.id !== id,
@@ -103,42 +101,50 @@ class HistoryPage extends Component {
 
     return (
       <div className="app-container">
-        <div className="search-container">
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/history-website-logo-img.png"
-            alt="app logo"
-          />
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/search-img.png"
-            alt="search"
-          />
-          <input
-            className="search-input"
-            type="search"
-            value={searchInput}
-            onChange={this.onChangeSearchInput}
-          />
-          {HistoryList.length !== 0 && (
-            <div className="history-container">
-              <ul className="history-list">
-                {searchResults.map(eachHistory => (
+        <div className="history-page-container">
+          <div className="header-search-container">
+            <img
+              src=" https://assets.ccbp.in/frontend/react-js/history-website-logo-img.png"
+              alt="app logo"
+              className="logo-img"
+            />
+            <div className="search-container">
+              <div className="search-image-container">
+                <img
+                  src="https://assets.ccbp.in/frontend/react-js/search-img.png"
+                  alt="search"
+                  className="search-img"
+                />
+              </div>
+              <input
+                type="search"
+                className="input-container"
+                onChange={this.onChangeSearchInput}
+                placeholder="Search History"
+              />
+            </div>
+          </div>
+          <div className="footer-page-container">
+            {searchResults.length >= 1 && (
+              <ul className="history-lists">
+                {searchResults.map(eachItem => (
                   <HistoryListItem
-                    key={eachHistory.id}
-                    historyDetails={eachHistory}
-                    onDeleteItem={this.onDeleteItem}
+                    historyDetails={eachItem}
+                    key={eachItem.id}
+                    deleteHistory={this.deleteHistory}
                   />
                 ))}
               </ul>
-            </div>
-          )}
-
-          {searchResults.length === 0 && (
-            <p className="message">There is no history to show</p>
-          )}
+            )}
+            {searchResults.length === 0 && <p>There is no history to show</p>}
+          </div>
         </div>
       </div>
     )
   }
 }
+// https://assets.ccbp.in/frontend/react-js/history-website-logo-img.png alt should be app logo
+// https://assets.ccbp.in/frontend/react-js/search-img.png alt should be search
+// https://assets.ccbp.in/frontend/react-js/delete-img.png alt should be delete
 
 export default HistoryPage
